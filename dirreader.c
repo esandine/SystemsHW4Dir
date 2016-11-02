@@ -4,14 +4,29 @@
 #include <dirent.h>
 #include <errno.h>
 
-int listFiles(char* path){
+int printFiles(char* path){
   DIR *d = opendir(path);
+  printf("All files:\n");
   struct dirent *content= readdir(d);
-  while(*content){
+  while(content){
+    printf("Name: %s\n",content->d_name);
+    //printf("Content: %d\n", content);
     content=readdir(d);
   }
-  printf("dirent: %s\n", content->d_name);
-  printf("Errno: %d\n", errno);
+  closedir(d);
+}
+
+int printRegules(char* path){
+  DIR *d = opendir(path);
+  printf("All files:\n");
+  struct dirent *content= readdir(d);
+  while(content){
+    printf("Name: %s\n",content->d_name);
+    //printf("Content: %d\n", content);                                         
+    content=readdir(d);
+  }
+  closedir(d);  
+
 }
 int main(){
   listFiles("testdir");
